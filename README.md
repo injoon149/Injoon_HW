@@ -40,6 +40,7 @@ Spring Boot 기반으로 **회원(Member) – 주문(Order) – 결제(Payment)*
 
 ```text
 Member (1) —— (N) Order (1) —— (1) Payment
-<img width="868" height="454" alt="image" src="https://github.com/user-attachments/assets/f6336e00-11ec-4873-8291-1c05596d6797" />
+```
+<img width="868" height="454" alt="Image" src="https://github.com/user-attachments/assets/6e7fffd7-2112-4d15-99a3-ac31f47bef86" />
 
 

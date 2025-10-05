@@ -44,7 +44,7 @@ class MemberControllerIntegrationTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(body))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").exists())
+                .andExpect(jsonPath("$.memberId").exists())
                 .andExpect(jsonPath("$.name").value("홍길동"))
                 .andExpect(jsonPath("$.email").value("hong@test.com"))
                 .andReturn();
@@ -52,12 +52,12 @@ class MemberControllerIntegrationTest {
         // then: 응답에서 id 추출하여 조회 검증
         String json = createResult.getResponse().getContentAsString();
         JsonNode root = objectMapper.readTree(json);
-        long id = root.get("id").asLong();
+        long id = root.get("memberId").asLong();
         assertThat(id).isPositive();
 
         mockMvc.perform(get("/api/members/{id}", id))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").value(id))
+                .andExpect(jsonPath("$.memberId").value(id))
                 .andExpect(jsonPath("$.name").value("홍길동"))
                 .andExpect(jsonPath("$.email").value("hong@test.com"));
     }

@@ -38,11 +38,11 @@ class OrderControllerIntegrationTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(memberBody))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").exists())
+                .andExpect(jsonPath("$.memberId").exists())
                 .andReturn();
 
         JsonNode memberNode = om.readTree(memberCreate.getResponse().getContentAsString());
-        long memberId = memberNode.get("id").asLong();
+        long memberId = memberNode.get("memberId").asLong();
         assertThat(memberId).isPositive();
 
         // 2) 주문 생성
@@ -108,7 +108,7 @@ class OrderControllerIntegrationTest {
                 .andExpect(status().isOk())
                 .andReturn();
         long memberId = om.readTree(memberCreate.getResponse().getContentAsString())
-                .get("id").asLong();
+                .get("memberId").asLong();
 
         // 음수 금액으로 주문 생성
         String badOrderBody = String.format("""

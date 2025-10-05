@@ -34,10 +34,10 @@ class PaymentControllerIntegrationTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(body))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").exists())
+                .andExpect(jsonPath("$.memberId").exists())
                 .andReturn();
         JsonNode node = om.readTree(res.getResponse().getContentAsString());
-        return node.get("id").asLong();
+        return node.get("memberId").asLong();
     }
 
     /**  주문 하나 만들고 id 반환 */
@@ -89,7 +89,7 @@ class PaymentControllerIntegrationTest {
     @Test
     @DisplayName("결제 승인 → 상태 APPROVED & approvedAt 존재, 주문 상태 PAID")
     void approve_success() throws Exception {
-        long memberId = createMember("임꺽정", "lim+pay@test.com");
+        long memberId = createMember("최인준", "choi@test.com");
         long orderId = createOrder(memberId, 42000.0);
 
         // 결제 요청
@@ -132,7 +132,7 @@ class PaymentControllerIntegrationTest {
     @Test
     @DisplayName("결제 요청 금액 불일치 → 400 (payment amount must equal order amount)")
     void request_amount_mismatch() throws Exception {
-        long memberId = createMember("강감찬", "kang+pay@test.com");
+        long memberId = createMember("서아름", "SEO@test.com");
         long orderId = createOrder(memberId, 10000.0);
 
         String body = String.format("{\"orderId\": %d, \"amount\": 9999, \"method\": \"CARD\"}", orderId);

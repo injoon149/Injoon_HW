@@ -12,7 +12,6 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<Map<String, String>> handleIllegalArgument(IllegalArgumentException e) {
-        // 메시지 내용에 따라 상태 코드 분기 가능
         HttpStatus status = e.getMessage() != null && e.getMessage().contains("not found")
                 ? HttpStatus.NOT_FOUND
                 : HttpStatus.BAD_REQUEST;

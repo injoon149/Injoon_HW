@@ -45,7 +45,7 @@ class MemberServiceTest {
         MemberResponse res = memberService.register(req);
 
         // then
-        assertThat(res.getId()).isEqualTo(1L);
+        assertThat(res.getMemberId()).isEqualTo(1L);
         assertThat(res.getName()).isEqualTo("홍길동");
         assertThat(res.getEmail()).isEqualTo("hong@test.com");
         verify(memberRepository).findByEmail("hong@test.com");
@@ -114,7 +114,7 @@ class MemberServiceTest {
 
         MemberResponse res = memberService.getDto(5L);
 
-        assertThat(res.getId()).isEqualTo(5L);
+        assertThat(res.getMemberId()).isEqualTo(5L);
         assertThat(res.getName()).isEqualTo("홍길동");
         assertThat(res.getEmail()).isEqualTo("hong@test.com");
     }
